@@ -14,10 +14,11 @@ class HomeRepo @Inject constructor(
 ) {
 
     suspend fun getUserList(
+        page : Int = 1,
         onComplete : (GetUserResponse) -> Unit = {}
     ) {
         try {
-            baseRepo.provideHome().getUserList().onSuccessOrError(
+            baseRepo.provideHome().getUserList(page).onSuccessOrError(
                 invokeError = {
                     Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
                 },

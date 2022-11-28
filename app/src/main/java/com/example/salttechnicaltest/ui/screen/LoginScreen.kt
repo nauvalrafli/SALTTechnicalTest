@@ -77,7 +77,7 @@ object LoginScreen : Screen {
                         loginViewModel.password.value = it
                     },
                     label = {
-                        Text("loginViewModel.Password")
+                        Text("Password")
                     },
                     modifier = Modifier.fillMaxWidth(),
                     visualTransformation = if(passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
@@ -99,7 +99,6 @@ object LoginScreen : Screen {
                 Spacer(modifier = Modifier.height(12.dp))
                 Button(
                     onClick = {
-                        /*TODO login */
                         runBlocking {
                             loginViewModel.login {
                                 navController.navigate(HomeScreen.routeName)
@@ -111,6 +110,21 @@ object LoginScreen : Screen {
                         .fillMaxWidth()
                 ) {
                     Text(text = "LOGIN", color = Color.White)
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+                Button(
+                    onClick = {
+                        runBlocking {
+                            loginViewModel.register {
+                                navController.navigate(HomeScreen.routeName)
+                            }
+                        }
+                    },
+                    modifier = Modifier
+                        .background(Color.Blue.copy(alpha = 0.3f), RoundedCornerShape(12.dp))
+                        .fillMaxWidth()
+                ) {
+                    Text(text = "Register", color = Color.White)
                 }
             }
         }

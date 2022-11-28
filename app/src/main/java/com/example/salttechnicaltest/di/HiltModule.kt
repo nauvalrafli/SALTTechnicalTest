@@ -1,6 +1,7 @@
 package com.example.salttechnicaltest.di
 
 import android.content.Context
+import com.example.salttechnicaltest.data.datastore.DataStoreManager
 import com.example.salttechnicaltest.data.repository.AuthRepo
 import com.example.salttechnicaltest.data.repository.BaseRepo
 import com.example.salttechnicaltest.data.repository.HomeRepo
@@ -45,5 +46,11 @@ object HiltModule {
         @ApplicationContext context : Context,
         baseRepo: BaseRepo
     ) = AuthRepo(baseRepo, context)
+
+    @Provides
+    @Singleton
+    fun provideDataStoreManager(
+        @ApplicationContext context: Context
+    ) : DataStoreManager = DataStoreManager(context)
 
 }

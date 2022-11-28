@@ -33,4 +33,22 @@ class AuthRepo @Inject constructor(
         }
     }
 
+    suspend fun register(
+        username: String,
+        password: String,
+        onSuccess: (LoginResponse) -> Unit = {}
+    ) {
+        try {
+            Log.d("CALLED", username + password)
+            baseRepo.provideAuth().register(LoginRequest(username, password)).onSuccessOrError(
+                invokeSuccess = onSuccess,
+                invokeError = {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                }
+            )
+        } catch (e : java.lang.Exception) {
+            Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
